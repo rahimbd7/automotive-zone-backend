@@ -32,15 +32,34 @@ async function run() {
         const usersCollection = client.db('automotiveDB').collection('users');
         const productsCollection = client.db('automotiveDB').collection('products');
         const cartsCollection = client.db('automotiveDB').collection('carts');
+        const categoriesCollection = client.db('automotiveDB').collection('categories');
 
-        // Users Related APIs
+        // ### Users Related APIs
+
         app.post('/users/add', async (req, res) => {
             const data = req.body;
         })
 
       
-        // Brand Related APIs
-        // Products Related APIs
+        // ### Brand Related APIs
+
+        app.post('/categories',async(req,res)=>{
+            const data = req.body;
+            const result = await categoriesCollection.insertOne(data);
+            res.send(result);
+        })
+
+        app.get('/categories',async(req,res)=>{
+            const result = await categoriesCollection.find().toArray();
+            res.send(result);
+        })
+
+
+
+
+        
+        // ### Products Related APIs
+
         app.get('/products', async (req, res) => {
             
         })
@@ -62,7 +81,7 @@ async function run() {
             const data = req.body;
         })
 
-        // Carts Related APIs
+        // ### Carts Related APIs
 
         app.get('/carts', async (req, res) => {
             res.send('all the carts')

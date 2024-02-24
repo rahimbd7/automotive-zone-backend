@@ -61,7 +61,8 @@ async function run() {
         // ### Products Related APIs
 
         app.get('/products', async (req, res) => {
-            
+            const result = await productsCollection.find().toArray();
+            res.send(result);
         })
 
         app.get('/products/details/:id', async (req, res) => {
@@ -70,6 +71,8 @@ async function run() {
 
         app.post('/products/add', async (req, res) => {
             const data = req.body;
+            const result = await productsCollection.insertOne(data);
+            res.send(result);
         })
 
         app.delete('/products/delete/:id', async (req, res) => {

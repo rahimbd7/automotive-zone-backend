@@ -1,6 +1,6 @@
 //oR4aMimZawl6da8x
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
@@ -54,6 +54,13 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/categories/:name',async(req,res)=>{
+            const name = req.params.name;
+            const query = { brand: name};
+            const result = await productsCollection.find(query).toArray();
+            res.send(result);
+        })
+
 
 
 
@@ -67,6 +74,9 @@ async function run() {
 
         app.get('/products/details/:id', async (req, res) => {
             const id = req.params.id;
+            const query = {_id: new ObjectId(id)}
+            const result = await productsCollection.findOne(query);
+            res.send(result);
         })
 
         app.post('/products/add', async (req, res) => {

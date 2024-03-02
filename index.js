@@ -110,8 +110,11 @@ async function run() {
 
         // ### Carts Related APIs
 
-        app.get('/carts', async (req, res) => {
-            res.send('all the carts')
+        app.get('/carts/:uid', async (req, res) => {
+            const uid= req.params.uid;
+            const query = {uid :uid}
+            const result = await cartsCollection.find(query).toArray();
+            res.send(result);
         })
 
         app.post('/carts/add', async (req, res) => {

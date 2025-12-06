@@ -120,4 +120,4 @@ yarn dev
 http://localhost:5000
 ```
 ## 🚀 Deployment
-#### This Project is deployed using <strong> Firebase Hosting</strong>
+#### This Project is deployed using <strong> Vercel Hosting</strong>
